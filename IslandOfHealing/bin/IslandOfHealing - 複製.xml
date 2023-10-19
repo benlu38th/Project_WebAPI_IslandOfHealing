@@ -1,0 +1,1235 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IslandOfHealing</name>
+    </assembly>
+    <members>
+        <member name="M:IslandOfHealing.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:IslandOfHealing.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:IslandOfHealing.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:IslandOfHealing.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:IslandOfHealing.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:IslandOfHealing.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:IslandOfHealing.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,IslandOfHealing.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,IslandOfHealing.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:IslandOfHealing.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},IslandOfHealing.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.#ctor(IslandOfHealing.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,IslandOfHealing.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:IslandOfHealing.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:IslandOfHealing.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:IslandOfHealing.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:IslandOfHealing.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AdministratorController.CancelWriter(System.Int32)">
+            <summary>
+            移除作家身分
+            </summary>
+            <param name="writerid">欲移除作家身分的使用者id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AdministratorController.ExpenseCreate(System.Int32)">
+            <summary>
+            創建費用單
+            </summary>
+            <param name="userid">被委託人(作家)id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AdministratorController.ExpenseGet">
+            <summary>
+            取得費用資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AdministratorController.ExpenseUpdate(IslandOfHealing.Models.ViewModel.InputExpense)">
+            <summary>
+            更新費用單
+            </summary>
+            <param name="inputExpense">費用單編號、合約編號、付款時間、金額、付款情形</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AdministratorController.SelectedArticle(System.Int32)">
+            <summary>
+            給予文章精選
+            </summary>
+            <param name="articleid">文章id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AdministratorController.CancelSelectedArticle(System.Int32)">
+            <summary>
+            取消文章精選
+            </summary>
+            <param name="articleid">文章id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AdministratorController.ApplyForWriterResult(System.Int32,System.Int32)">
+            <summary>
+            審核使用者申請作家結果
+            </summary>
+            <param name="userid">使用者id</param>
+            <param name="result">2=審核失敗；3=審核成功</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AdministratorController.GetAdministratorArticles">
+            <summary>
+            取得待審核、審核中、審核失敗、審核成功文章
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AdministratorController.GetAdministratorWriters">
+            <summary>
+            取得全部作家及已申請作家之使用者
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AIController.GetUseAITimes">
+            <summary>
+            取得使用者使用AI次數
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AIController.AddUseAITimes">
+            <summary>
+            使用者使用AI次數+1
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.AIController.AIQuestionAnswersCreate(IslandOfHealing.Models.ViewModel.InputAIMessage)">
+            <summary>
+            儲存聊天記錄
+            </summary>
+            <param name="inputAIMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ApplyForWriterController.ApplyForWriter">
+            <summary>
+            申請成為作家(未申請、審核失敗變成已申請)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ArticlesController.UpdateArticleImg">
+            <summary>
+            新增文章/草稿圖片
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ArticlesController.AddarticleCategory(System.String)">
+            <summary>
+            新增文章分類
+            </summary>
+            <param name="category">文章分類</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ArticlesController.ArticleCreate(IslandOfHealing.Models.ViewModel.CreateArticle)">
+            <summary>
+            新增文章/草稿
+            </summary>
+            <param name="inputCreateArticle">文章標題、文章內文、標籤、閱讀權限、文章分類、內容摘要、文章進度</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ArticlesController.UpdateProgress(System.Int32,IslandOfHealing.Models.ViewModel.ArticleProgress)">
+            <summary>
+            更新文章進度
+            </summary>
+            <param name="articleid">文章id</param>
+            <param name="inputArticleProgress">文章進度</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ArticlesController.UpdateArticleImg(System.Int32)">
+            <summary>
+            修改文章封面照
+            </summary>
+            <param name="articleid">文章id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ArticlesController.DeleteArticle(System.Int32)">
+            <summary>
+            刪除文章
+            </summary>
+            <param name="articleid">文章id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ArticlesController.UpdateArticle(System.Int32,IslandOfHealing.Models.ViewModel.CreateArticle)">
+            <summary>
+            更新文章(不包含封面照)
+            </summary>
+            <param name="articleid">文章id</param>
+            <param name="inputCreateArticle">欲更新的文章內容</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.CollectController.CollectArticle(System.Int32)">
+            <summary>
+            收藏文章
+            </summary>
+            <param name="articleid">文章id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.CollectController.CancelCollectArticle(System.Int32)">
+            <summary>
+            取消收藏文章
+            </summary>
+            <param name="articleid">文章id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.CommentArticleController.AddArticleComment(IslandOfHealing.Models.ViewModel.ArticleComment)">
+            <summary>
+            新增文章留言
+            </summary>
+            <param name="inputArticleComment">文章留言、文章編號</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.CommentArticleController.ArticleCommentDeleteUpdate(IslandOfHealing.Models.ViewModel.ArticleCommentUpdate)">
+            <summary>
+            更新文章留言
+            </summary>
+            <param name="articleCommentUpdate">文章留言Id、文章留言內容</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.CommentArticleController.ArticleCommentDelete(System.Int32)">
+            <summary>
+            刪除文章留言
+            </summary>
+            <param name="commentid">文章留言id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.CommentConversationController.AddConversationComment(IslandOfHealing.Models.ViewModel.ConversationComment)">
+            <summary>
+            新增話題留言
+            </summary>
+            <param name="inputConversationComment">話題留言、話題編號</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.CommentConversationController.ConversationCommentUpdate(IslandOfHealing.Models.ViewModel.ConversationCommentUpdate)">
+            <summary>
+            更新話題留言
+            </summary>
+            <param name="inputConversationCommentUpdate">話題留言Id、話題留言內容</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.CommentConversationController.ConversationCommentDelete(System.Int32)">
+            <summary>
+            刪除話題留言
+            </summary>
+            <param name="commentid">話題留言id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.CommentConversationController.ReadCategoryConversations(IslandOfHealing.Models.ViewModel.ReadCategoryConversations)">
+            <summary>
+            瀏覽特定話題
+            </summary>
+            <param name="inputReadCategoryConversations">話題分類編號、現在在第幾頁</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ConversationController.ConversationCategoryGet">
+            <summary>
+            取得全部話題分類(XX相談室)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ConversationController.ConversationCategoryCreate(IslandOfHealing.Models.ViewModel.IntputConversationsCategory)">
+            <summary>
+            新增話題分類(XX相談室)
+            </summary>
+            <param name="intputConversationsCategory">分類名稱、分類介紹</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ConversationController.ArticleCreate(IslandOfHealing.Models.ViewModel.InputCreateConversation)">
+            <summary>
+            新增話題
+            </summary>
+            <param name="inputCreateConversation">話題標題、話題內文、標籤、是否匿名、話題分類、內容摘要</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ConversationController.UpdateArticleImg(System.Int32)">
+            <summary>
+            修改話題封面照
+            </summary>
+            <param name="conversationid">話題id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ConversationController.UpdateConversationImg">
+            <summary>
+            新增話題圖片
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ConversationController.DeleteConversation(System.Int32)">
+            <summary>
+            刪除話題
+            </summary>
+            <param name="conversationid">話題id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ConversationController.UpdateConversation(System.Int32,IslandOfHealing.Models.ViewModel.InputCreateConversation)">
+            <summary>
+            更新話題(不包含封面照)
+            </summary>
+            <param name="conversationid">話題編號id</param>
+            <param name="inputCreateConversation">話題標題、話題內容、標籤、匿名、話題分類(XX相談室)、內容摘要</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ForgetAndSetPwdController.Put(IslandOfHealing.Models.ViewModel.SetPwd)">
+            <summary>
+            更新密碼
+            </summary>
+            <param name="setPwd">帳號、密碼、密碼確認</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ForgetAndSetPwdController.Post(System.String)">
+            <summary>
+            忘記密碼，輸入email傳送重設連結
+            </summary>
+            <param name="email">電子信箱</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ForgetAndSetPwdController.Post(System.String,System.String)">
+            <summary>
+            激活平台提供忘記密碼使用者的新密碼
+            </summary>
+            <param name="email">使用者Account</param>
+            <param name="guid">使用者GUID</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.HelloWorldController.PusherBeWriter(System.Int32)">
+            <summary>
+            Pusher-發送使用者成為作家訊息
+            </summary>
+            <param name="writerid">成為作家的使用者id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.HelloWorldController.PusherNewArticleApproved(System.Int32)">
+            <summary>
+            Pusher-發送作家發布新文章審核成功訊息
+            </summary>
+            <param name="articleid">審核成功文章id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.HelloWorldController.PusherFollowedWriterNewArticle(System.Int32)">
+            <summary>
+            Pusher-發送使用者追蹤作家發布新文章訊息
+            </summary>
+            <param name="articleid">新文章的id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.LikeController.LikeArticle(System.Int32)">
+            <summary>
+            給予文章愛心
+            </summary>
+            <param name="articleid">文章id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.LikeController.CancelLikeArticle(System.Int32)">
+            <summary>
+            取消文章愛心
+            </summary>
+            <param name="articleid">文章id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.LogInController.LogIn(IslandOfHealing.Models.ViewModel.LoginSignUp)">
+            <summary>
+            登入功能
+            </summary>
+            <param name="loginSignUp">登入輸入之帳號密碼</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.NewebPayController.setchargedata(IslandOfHealing.Models.ViewModel.ChargeRequest)">
+            <summary>
+            創建訂單(未付款)
+            </summary>
+            <param name="chargeData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.NewebRecieveController.getpaymentdata(IslandOfHealing.Security.NewebPayReturn)">
+            <summary>
+            接收藍新回傳之資料
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.NotificationController.FollowedWriterNewArticleNotificationCreate(System.Int32)">
+            <summary>
+            建立已追蹤作家發布新文章(僅一篇)的訊息
+            </summary>
+            <param name="articleid">新文章的id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.NotificationController.WriterNotificationCreate(System.Int32)">
+            <summary>
+            建立使用者成為作家訊息
+            </summary>
+            <param name="writerid">申請成為作家的使用者id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.NotificationController.WriterNewArticleNotificationCreate(System.Int32)">
+            <summary>
+            建立作家發表文章審核成功訊息
+            </summary>
+            <param name="articleid">審核成功的文章id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ReadArticlesController.GetHotWriters(System.Int32)">
+            <summary>
+            取得熱門使用者
+            </summary>
+            <param name="userid">使用者編號(未登入userid=0)</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ReadArticlesController.SearchArticle(System.String,System.Int32,System.Int32)">
+            <summary>
+            搜尋全部文章、特定文章
+            </summary>
+            <param name="keyword">關鍵字</param>
+            <param name="categoryid">文章分類id(全部文章categoryid=0)</param>
+            <param name="userid">使用者id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ReadArticlesController.PaidArticleClick(System.Int32)">
+            <summary>
+            登入帳號觀看付費文章次數(計算點擊次數 + 1)
+            </summary>
+            <param name="articleid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ReadArticlesController.WriterArticlesGet(System.Int32,System.Int32)">
+            <summary>
+            瀏覽作家個人頁面
+            </summary>
+            <param name="writerid">作家id</param>
+            <param name="userid">使用者id(未登入=0)</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ReadArticlesController.ReadOneArticle(System.Int32,System.Int32)">
+            <summary>
+            瀏覽一篇文章
+            </summary>
+            <param name="articleid">文章id</param>
+            <param name="userid">使用者id(若未登入輸入0)</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ReadArticlesController.ReadCategoryArticles(IslandOfHealing.Models.ViewModel.ReadCategoryArticles)">
+            <summary>
+            瀏覽特定文章
+            </summary>
+            <param name="readCategoryArticles">第幾頁、使用者編號</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.ReadArticlesController.ReadAllArticles(IslandOfHealing.Models.ViewModel.ReadAllArticles)">
+            <summary>
+            取得全部文章
+            </summary>
+            <param name="readAllArticles">第幾頁、使用者編號</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.SignUpController.SignUp(IslandOfHealing.Models.ViewModel.LoginSignUp)">
+            <summary>
+            註冊功能
+            </summary>
+            <param name="loginSignUp">註冊輸入之帳號密碼</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.TrendAnalysisController.TrendAnalysisGet(System.Int32,System.Int32)">
+            <summary>
+            取得熱門關鍵字(2、3、4個中文字)排名前20名(文章標題、文章、留言、AI問題)
+            </summary>
+            <param name="year">年</param>
+            <param name="month">月(取得一整年資料輸入0)</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserFunctionController.NotificationDelete(System.Int32)">
+            <summary>
+            刪除訊息
+            </summary>
+            <param name="notificationid">訊息編號</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserFunctionController.ReadNotification(System.Int32)">
+            <summary>
+            已讀訊息
+            </summary>
+            <param name="notificationid">訊息編號</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserFunctionController.NotificationsGet">
+            <summary>
+            取得使用者過去一個月的訊息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserFunctionController.GetApplyForWriterProgress">
+            <summary>
+            取得申請作家進度
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserFunctionController.CancelRenewMembership">
+            <summary>
+            續訂會員、取消續訂會員
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserFunctionController.CollectWriter(System.Int32)">
+            <summary>
+            追蹤作家
+            </summary>
+            <param name="writerid">作家id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserFunctionController.CancelCollectWriter(System.Int32)">
+            <summary>
+            取消追蹤作家
+            </summary>
+            <param name="writerid">被追蹤者(作家)id</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserFunctionController.FollowedWriterGet">
+            <summary>
+            瀏覽個人追蹤作家清單
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserFunctionController.CollectedArticlesGet">
+            <summary>
+            瀏覽個人收藏文章清單
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserInfController.UploadWriterImgURL">
+            <summary>
+            新增使用者大頭照
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserInfController.Update(IslandOfHealing.Models.ViewModel.UpdateUserInfo)">
+            <summary>
+            更新使用者資訊(暱稱、頭銜、生日、自介~)
+            </summary>
+            <param name="updateUserInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserInfController.Get">
+            <summary>
+            取得會員資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserOrderController.UserOrderDetailGet">
+            <summary>
+            瀏覽個人訂閱細節
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.UserOrderController.UserOrdersGet">
+            <summary>
+            取得使用者已付款歷史訂單
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.WriterController.GetTrafficAndRoyalty(System.Int32,System.Int32)">
+            <summary>
+            取得作家後台數據-流量收益及稿費
+            </summary>
+            <param name="year">年</param>
+            <param name="month">月(全年資料請輸入0)</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.WriterController.GetNumberOfFans(System.Int32)">
+            <summary>
+            取得作家後台數據-追蹤人數
+            </summary>
+            <param name="year">年</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.WriterController.GetWriterArticleAnalysis(System.Int32,System.Int32)">
+            <summary>
+            取得作家後台數據-貼文分析
+            </summary>
+            <param name="year">年</param>
+            <param name="month">月</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.WriterController.GetWriterOverview(System.Int32,System.Int32)">
+            <summary>
+            取得作家後台數據-總覽
+            </summary>
+            <param name="year">年</param>
+            <param name="month">月</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Controllers.WriterController.GetWriterArticle">
+            <summary>
+            取得作者文章列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Models.Function.Utility.CreateSalt(System.Int32)">
+            <summary>
+            建立一個指定長度的隨機salt值
+            </summary>
+            <param name="saltLenght">鹽的長度</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Models.Function.Utility.CreatePasswordHash(System.String,System.String)">
+            <summary>
+            密碼加salt後返回加密後的字串(密碼 , salt)
+            </summary>
+            <param name="pwd">原始密碼</param>
+            <param name="strSalt">鹽</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Models.Function.Utility.GenerateResetPasswordLink(System.String,System.String)">
+            <summary>
+            產生重設密碼連結
+            </summary>
+            <param name="email">電子信箱</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Models.Function.Utility.SendResetPasswordEmail(System.String,System.String)">
+            <summary>
+            忘記密碼寄通知信
+            </summary>
+            <param name="toEmail"></param>
+            <param name="resetLink"></param>
+        </member>
+        <member name="M:IslandOfHealing.Models.Function.Utility.GetWordsList(System.String[],System.Int32)">
+            <summary>
+            輸入字串陣列，根據切割的數量，返回該數量的字串List
+            </summary>
+            <param name="input">輸入的字串陣列</param>
+            <param name="cut">欲切割的字元輛</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Models.Function.Utility.GetWordsFromArticle(System.String)">
+            <summary>
+            將輸入的字串文章切割成字串陣列詞彙
+            </summary>
+            <param name="article">輸入的string文章</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Models.Function.Utility.CountWordFrequency(System.Collections.Generic.List{System.String})">
+            <summary>
+            這是一個靜態方法，用來統計一個字串List中每個詞彙的出現次數，並回傳結果以字典形式存儲。
+            </summary>
+            <param name="words">List，儲存詞彙</param>
+            <returns></returns>
+        </member>
+        <member name="P:IslandOfHealing.Models.ViewModel.LoginSignUp.Account">
+            <summary>
+            使用者帳號
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Models.ViewModel.LoginSignUp.Password">
+            <summary>
+            使用者密碼
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Models.ViewModel.SetPwd.Password">
+            <summary>
+            使用者密碼
+            </summary>
+        </member>
+        <member name="P:IslandOfHealing.Models.ViewModel.SetPwd.ConfirmPassword">
+            <summary>
+            使用者密碼確認
+            </summary>
+        </member>
+        <member name="T:IslandOfHealing.Security.AuthorizationServerProvider">
+            <summary>
+            OAuth 配置並繼承 OAuthAuthorizationServerProvider
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Security.AuthorizationServerProvider.MatchEndpoint(Microsoft.Owin.Security.OAuth.OAuthMatchEndpointContext)">
+            <summary>
+            在驗證客戶端身分前調用，並依客戶端請求來源配置 CORS 允許類型設定
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Security.AuthorizationServerProvider.SetCORSPolicy(Microsoft.Owin.IOwinContext)">
+            <summary>
+            依請求來源配置 CORS 允許類型設定
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:IslandOfHealing.Security.CryptoUtil">
+            <summary>
+            藍新加解密 Util
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Security.CryptoUtil.EncryptAES(System.Byte[],System.String,System.String)">
+            <summary>
+            字串加密 AES
+            </summary>
+            <param name="source">加密前字串</param>
+            <param name="cryptoKey">加密金鑰</param>
+            <param name="cryptoIV">cryptoIV</param>
+            <returns>加密後字串</returns>
+        </member>
+        <member name="M:IslandOfHealing.Security.CryptoUtil.DecryptAES(System.Byte[],System.String,System.String)">
+            <summary>
+            字串解密 AES
+            </summary>
+            <param name="source">解密前字串</param>
+            <param name="cryptoKey">解密金鑰</param>
+            <param name="cryptoIV">cryptoIV</param>
+            <returns>解密後字串</returns>
+        </member>
+        <member name="M:IslandOfHealing.Security.CryptoUtil.EncryptAESHex(System.String,System.String,System.String)">
+            <summary>
+            加密後再轉 16 進制字串
+            </summary>
+            <param name="source">加密前字串</param>
+            <param name="cryptoKey">加密金鑰</param>
+            <param name="cryptoIV">cryptoIV</param>
+            <returns>加密後的字串</returns>
+        </member>
+        <member name="M:IslandOfHealing.Security.CryptoUtil.DecryptAESHex(System.String,System.String,System.String)">
+            <summary>
+            16 進制字串解密
+            </summary>
+            <param name="source">加密前字串</param>
+            <param name="cryptoKey">加密金鑰</param>
+            <param name="cryptoIV">cryptoIV</param>
+            <returns>解密後的字串</returns>
+        </member>
+        <member name="M:IslandOfHealing.Security.CryptoUtil.EncryptSHA256(System.String)">
+            <summary>
+            字串加密 SHA256
+            </summary>
+            <param name="source">加密前字串</param>
+            <returns>加密後字串</returns>
+        </member>
+        <member name="M:IslandOfHealing.Security.CryptoUtil.GetByteArray(System.String)">
+            <summary>
+            將 16 進位字串轉換為 byteArray
+            </summary>
+            <param name="source">欲轉換之字串</param>
+            <returns></returns>
+        </member>
+        <member name="T:IslandOfHealing.Security.JwtAuthFilter">
+            <summary>
+            JwtAuthFilter 繼承 ActionFilterAttribute 可生成 [JwtAuthFilter] 使用
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Security.JwtAuthFilter.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            過濾有用標籤 [JwtAuthFilter] 請求的 API 的 JwtToken 狀態及內容
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="M:IslandOfHealing.Security.JwtAuthFilter.GetToken(System.String)">
+            <summary>
+            將 Token 解密取得夾帶的資料
+            </summary>
+            <param name="token">JwtToken</param>
+            <returns></returns>
+        </member>
+        <member name="M:IslandOfHealing.Security.JwtAuthFilter.IsTokenExpired(System.String)">
+            <summary>
+            驗證 token 時效
+            </summary>
+            <param name="dateTime"></param>
+            <returns></returns>
+        </member>
+        <member name="T:IslandOfHealing.Security.JwtAuthUtil">
+            <summary>
+            JwtToken 生成功能
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Security.JwtAuthUtil.GenerateToken(System.Int32)">
+            <summary>
+            生成 JwtToken
+            </summary>
+            <param name="id">會員id</param>
+            <returns>JwtToken</returns>
+        </member>
+        <member name="M:IslandOfHealing.Security.JwtAuthUtil.ExpRefreshToken(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            生成只刷新效期的 JwtToken
+            </summary>
+            <returns>JwtToken</returns>
+        </member>
+        <member name="M:IslandOfHealing.Security.JwtAuthUtil.RevokeToken">
+            <summary>
+            生成無效 JwtToken
+            </summary>
+            <returns>JwtToken</returns>
+        </member>
+        <member name="T:IslandOfHealing.Startup">
+            <summary>
+            OWIN 啟動類別
+            </summary>
+        </member>
+        <member name="M:IslandOfHealing.Startup.Configuration(Owin.IAppBuilder)">
+            <summary>
+            應用程式配置
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:IslandOfHealing.Startup.ConfigureAuth(Owin.IAppBuilder)">
+            <summary>
+            啟用跨域及驗證配置
+            </summary>
+            <param name="app"></param>
+        </member>
+    </members>
+</doc>
